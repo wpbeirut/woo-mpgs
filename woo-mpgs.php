@@ -16,7 +16,7 @@
  * Plugin Name:       MPGS for WooCommerce
  * Plugin URI:        https://github.com/wpbeirut/woo-mpgs
  * Description:       WordPress Beiurt Community MPGS - WooCommerce plugin
- * Version:           2.0.0
+ * Version:           1.0.0
  * Author:            Wordpress Beirut Commpunity
  * Author URI:        https://www.meetup.com/Beirut-WordPress-Meetup/
  * License:           GPL-2.0+
@@ -30,4 +30,29 @@
 // If this file is called directly, abort.
 if (!defined( 'WPINC')) {
     die;
+}
+
+// Make sure WooCommerce is active
+if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) return;
+
+/**
+ * Offline Payment Gateway
+ *
+ * Provides a Payment Gateway; for mpgs
+ *
+ * @class       WC_Gateway_Mpgs
+ * @extends     WC_Payment_Gateway
+ * @version     1.0.0
+ * @package     WooCommerce/Classes/Payment
+ * @author      SkyVerge
+ */
+add_action( 'plugins_loaded', 'wc_mpgs_gateway_init', 11 );
+
+function wc_mpgs_gateway_init() {
+
+    class WC_Gateway_Mpgs extends WC_Payment_Gateway {
+
+        // The meat and potatoes of our gateway will go here
+
+    } // end \WC_Gateway_Mpgs class
 }
